@@ -2,8 +2,12 @@
 __author__ = 'Rocky'
 #目前只适用于android 7.0 系统
 from uiautomator import device as d
-import subprocess,time
+import subprocess,time,subprocess
 class CrashWIFI():
+
+    def cmd(self,cmd_line):
+        p=subprocess.Popen(cmd_line,stdout=subprocess.PIPE,shell=True)
+        p.communicate()
 
     def crash_wifi_android_n(self,ap,dict_file):
         f=open(dict_file,'r')
@@ -54,7 +58,6 @@ class CrashWIFI():
 
         # d.press.enter()
 
-
         d.press.down()
         d.press.down()
         d.press.enter()
@@ -73,6 +76,38 @@ class CrashWIFI():
         else:
             return 0
 
+
+    def crack_cuizhi(self,username,password):
+        print d.info
+        d.press.home()
+        d(textContains=u'Settings').click()
+        time.sleep(3)
+        d(text=u'无线网络').click()
+        time.sleep(5)
+        d(text=u'手动添加网络').click()
+        username='adb shell input text %s' %username
+        self.cmd(username)
+        time.sleep(5)
+        d(text=u'安全性').click()
+        time.sleep(3)
+        d(text=u'WPA/WPA2 PSK').click()
+        d.press.down()
+        d.press.down()
+        d.press.down()
+
+    def test_case(self):
+        d.press.down()
+        print "Done"
+        d.press.down()
+        d.press.down()
+        d.press.down()
+        d.press.down()
+        d(text=u'无线网络').click()
+        d.dump('hierarchy.xml')
+        xml=d.dump()
+        print type(xml)
 if __name__=='__main__':
     obj=CrashWIFI()
-    obj.crash_wifi_android_n('xiaomi2g','password.txt')
+    #obj.crash_wifi_android_n('xiaomi2g','password.txt')
+    #obj.crack_cuizhi('hello','')
+    obj.test_case()
