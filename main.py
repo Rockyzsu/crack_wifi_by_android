@@ -23,22 +23,20 @@ class CrashWIFI():
             count=count+1
 
     def crash(self,count,ap,passwd):
-        print "WIFI connect in LOOP %d" % count
+        def_timeout=120
+        print "WIFI crack in LOOP %d" % count
         # get_log(count)
         d.press.home()
-        d.press.down()
-        d.press.down()
-        d.press.down()
 
-        d.press.right()
-        d.press.right()
-        #d.press.right()
-        # d.press.right()
-
-        d.press.enter()
+        d(text='Settings').click()
         time.sleep(3)
         d.press.enter()
-        time.sleep(3)
+        time.sleep(2)
+        d.press.enter()
+
+
+
+        time.sleep(2)
         d.press.down()
         d.press.down()
         d.press.down()
@@ -110,4 +108,5 @@ if __name__=='__main__':
     obj=CrashWIFI()
     #obj.crash_wifi_android_n('xiaomi2g','password.txt')
     #obj.crack_cuizhi('hello','')
-    obj.test_case()
+    #obj.test_case()
+    obj.crash_wifi_android_n('5G','dict.txt')
